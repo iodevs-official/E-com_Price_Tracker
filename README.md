@@ -7,7 +7,7 @@ python main.py
 ```
 
 ## How to fill config.py!?
- go-to config.py, and follow the instructions!
+ ```go-to config.py, and follow the instructions!```
 
 ## Commands
 ```
