@@ -9,14 +9,18 @@ class ErrorReportingHandler(logging.Handler):
         self.app = app
 
     def emit(self, record):
-        if record.levelno == logging.ERROR:
+        if record.levelno >= logging.ERROR:
+            # Use self.format(record) to get the full formatted message including traceback
+            full_log_message = self.format(record)
             try:
                 loop = asyncio.get_running_loop()
-                loop.create_task(report_error(self.app, record.getMessage()))
+                loop.create_task(report_error(self.app, full_log_message))
             except RuntimeError:
-                asyncio.run(report_error(self.app, record.getMessage()))
+                # If no loop is running, run it just for this task
+                asyncio.run(report_error(self.app, full_log_message))
 
 def init_logger(app, name=__name__, level=logging.INFO):
+    """Initializes the logger with console and custom error reporting handlers."""
     # Set up global logging format and level
     logging.basicConfig(
         level=level,
@@ -29,18 +33,10 @@ def init_logger(app, name=__name__, level=logging.INFO):
 
     # Attach error reporting handler to the root logger, so all errors are caught
     root_logger = logging.getLogger()
-    root_logger.addHandler(ErrorReportingHandler(app))
+    
+    # Avoid adding the handler multiple times if the logger is re-initialized
+    if not any(isinstance(h, ErrorReportingHandler) for h in root_logger.handlers):
+        root_logger.addHandler(ErrorReportingHandler(app))
 
-    # Return your app's logger if you want
+    # Return your app's logger
     return logging.getLogger(name)
-
-
-
-
-#-----------------------
-#USAGE
-#import logging
-
-#logger = logging.getLogger(__name__)
-
-#logger.error("eror msg", exc_info=True)
