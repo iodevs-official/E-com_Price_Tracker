@@ -6,7 +6,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-##How to fill config.py!?
+## How to fill config.py!?
  go-to config.py, and follow the instructions!
 
 ## Commands
