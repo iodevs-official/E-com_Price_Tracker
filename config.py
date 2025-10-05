@@ -2,24 +2,26 @@
 import os
 
 class Telegram():
-  API_ID = 
-  API_HASH = ""
-  BOT_TOKEN = ""
-  BOT_NICKNAME = "ecom-tracker"  
-
-  ADMIN = 6883997969
+  API_ID = int(os.getenv("API_ID", ""))                                   #For hardcoded verision, add your API ID in-between "", same goes to all variables
+  API_HASH = os.getenv("API_HASH", "")
+  BOT_TOKEN = os.getenv("BOT_TOKEN", "")
+  BOT_NICKNAME = os.getenv("BOT_NICKNAME", "")
+  
+  ADMIN = int(os.getenv("ADMIN", ""))     
 
 
   #Foece Sub
-  Fusb_name = "@botio_devs"  #channel user name with @
-  Fsub_ID = -1002054575318
-  Fsub_Link = "https://t.me/+T-rFTAhNFIRkMTc1" #Custom Invite Link to track User Joining
+  Fusb_name =  os.getenv("Fusb_name", "@botio_devs")                     #Fusb channel user name with @
+  Fsub_ID =  int(os.getenv("Fsub_ID", "-1002054575318"))     
+  Fsub_Link = os.getenv("Fsub_Link", "https://t.me/+9Mxv8UvcoPw0MjA9")   #Custom Invite Link to track User Joining
 
   #LOGGING
   SEND_JOIN_LOG = True
-  JOIN_LOG_CHANNEL = LOG_CHANNEL_ID = ERROR_LOGGER_ID = -100
-  CHECKER_LOG_TOPIC = 
-  ERROR_LOGGER_TOPIC = 
+  JOIN_LOG_CHANNEL = LOG_CHANNEL_ID = ERROR_LOGGER_ID = int(os.getenv("LOG_CHANNEL_ID", "-1002054575318"))
+  LOG_CHANNEL_ID = JOIN_LOG_CHANNEL = ERROR_LOGGER_ID
+  
+  CHECKER_LOG_TOPIC = 3
+  ERROR_LOGGER_TOPIC = 38
 
   
   #Button Link
@@ -28,7 +30,7 @@ class Telegram():
   
 
 class Db():
-  MONGO_URI = ""
+  MONGO_URI = os.getenv("MONGO_URI", "your mongo uri") 
   DB_NAME = "ecom-tracker"
 
   
