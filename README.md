@@ -7,8 +7,7 @@ python main.py
 ```
 
 ##How to fill config.py!?
-
-
+ go-to config.py, and follow the instructions!
 
 ## Commands
 ```
@@ -21,3 +20,8 @@ users - ❌
 bcast - ❌
 fcast - ❌
 ```
+
+
+
+
+#### Fully coded and maintained by https://t.me/botio_devs | https://t.me/Appuz_007
